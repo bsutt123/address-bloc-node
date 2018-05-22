@@ -8,34 +8,26 @@ module.exports = class MenuController {
       message:"Pleace choose from an option below: ",
       choices: [
         "Add New Contact",
+        "Print Today's Date",
         "Exit",
       ],
     };
 
     this.contacts = [];
-    this.responder = function(res) {
-      switch(res.mainMenuChoice) {
-      case "Add New Contact":
-        this.addContact();
-        break;
-      case "Exit":
-        this.exit();
-      default:
-        console.log("Invalid input");
-        this.main();
-      }
-    }.bind(this);
 
-    this.responder2 = this.responder2.bind(this);
+    this.responder = this.responder.bind(this);
   }
 
-  responder2(res) {
+  responder(res) {
     switch(res.mainMenuChoice) {
     case "Add New Contact":
       this.addContact();
       break;
     case "Exit":
       this.exit();
+    case "Print Today's Date":
+      this.getDate();
+      break;
     default:
       console.log("Invalid input");
       this.main();
@@ -44,7 +36,7 @@ module.exports = class MenuController {
   main() {
     console.log("Welcome to Address Bloc");
     inquirer.prompt(this.mainMenuQuestions).
-      then(this.responder2).
+      then(this.responder).
       catch( err => {
         console.error(err);
       })
@@ -62,5 +54,12 @@ module.exports = class MenuController {
   exit() {
     console.log("thanks for using address bloc!");
     process.exit();
+  }
+
+  getDate() {
+    this.clear();
+    var date = new Date();
+    console.log(date.toLocaleString());
+    this.main();
   }
 }
