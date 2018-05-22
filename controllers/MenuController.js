@@ -62,4 +62,8 @@ module.exports = class MenuController {
     console.log(date.toLocaleString());
     this.main();
   }
+
+  getContactCount() {
+    return this.contacts.length;
+  }
 }
