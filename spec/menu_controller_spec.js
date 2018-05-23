@@ -15,4 +15,15 @@ describe("MenuController", () => {
       expect(menu.getContactCount()).toBe(1);
     })
   })
+
+  describe("#remindMe method testing", () => {
+    let menu;
+    beforeEach( () => {
+      menu = new MenuController();
+    })
+
+    it ("should return correct string", () => {
+      expect(menu.remindMe()).toBe("Learning is a life-long pursuit.");
+    })
+  })
 })
